@@ -1,5 +1,5 @@
-#include <stdio.h>
 #include <assert.h>
+#include <stdio.h>
 
 struct Frame {
     // Each frame has a program counter to keep track its next
@@ -23,12 +23,15 @@ int hanoi(int n, char from, char to, char via) {
     Frame stk[64];
     Frame *top = stk - 1;
 
-    // Function call: push a new frame (PC=0) onto the stack
-    #define call(...) ({ *(++top) = (Frame){.pc = 0, __VA_ARGS__}; })
-    
-    // Function return: pop the top-most frame
-    #define ret(val) ({ top--; retval = (val); })
+// Function call: push a new frame (PC=0) onto the stack
+#define call(...) ({ *(++top) = (Frame){.pc = 0, __VA_ARGS__}; })
 
+// Function return: pop the top-most frame
+#define ret(val)        \
+    ({                  \
+        top--;          \
+        retval = (val); \
+    })
 
     // The last function-return's value. It is not obvious
     // that we only need one retval.
@@ -62,13 +65,26 @@ int hanoi(int n, char from, char to, char via) {
                     ret(1);
                 }
                 break;
-            case 1: call(n - 1, from, via, to); break;
-            case 2: f->c1 = retval; break;
-            case 3: call(1, from, to, via); break;
-            case 4: call(n - 1, via, to, from); break;
-            case 5: f->c2 = retval; break;
-            case 6: ret(f->c1 + f->c2 + 1); break;
-            default: assert(0);
+            case 1:
+                call(n - 1, from, via, to);
+                break;
+            case 2:
+                f->c1 = retval;
+                break;
+            case 3:
+                call(1, from, to, via);
+                break;
+            case 4:
+                call(n - 1, via, to, from);
+                break;
+            case 5:
+                f->c2 = retval;
+                break;
+            case 6:
+                ret(f->c1 + f->c2 + 1);
+                break;
+            default:
+                assert(0);
         }
 
         f->pc = next_pc;

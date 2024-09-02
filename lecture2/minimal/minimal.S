@@ -22,5 +22,5 @@ _start:
     syscall1(exit, 1)
 
 addr1:
-    .ascii "\033[01;31mHello, OS World\033[0m\n"
+    .ascii "\033[01;31mBye, OS World\033[0m\n"
 addr2:

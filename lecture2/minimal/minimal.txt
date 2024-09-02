@@ -1,0 +1,31 @@
+
+minimal.o:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000000000 <_start>:
+   0:	48 c7 c0 01 00 00 00 	mov    $0x1,%rax
+   7:	48 c7 c7 01 00 00 00 	mov    $0x1,%rdi
+   e:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+  15:	48 c7 c2 1a 00 00 00 	mov    $0x1a,%rdx
+  1c:	0f 05                	syscall 
+  1e:	48 c7 c0 3c 00 00 00 	mov    $0x3c,%rax
+  25:	48 c7 c7 01 00 00 00 	mov    $0x1,%rdi
+  2c:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+  33:	48 c7 c2 00 00 00 00 	mov    $0x0,%rdx
+  3a:	0f 05                	syscall 
+
+000000000000003c <addr1>:
+  3c:	1b 5b 30             	sbb    0x30(%rbx),%ebx
+  3f:	31 3b                	xor    %edi,(%rbx)
+  41:	33 31                	xor    (%rcx),%esi
+  43:	6d                   	insl   (%dx),%es:(%rdi)
+  44:	42 79 65             	rex.X jns ac <addr2+0x56>
+  47:	2c 20                	sub    $0x20,%al
+  49:	4f 53                	rex.WRXB push %r11
+  4b:	20 57 6f             	and    %dl,0x6f(%rdi)
+  4e:	72 6c                	jb     bc <addr2+0x66>
+  50:	64 1b 5b 30          	sbb    %fs:0x30(%rbx),%ebx
+  54:	6d                   	insl   (%dx),%es:(%rdi)
+  55:	0a                   	.byte 0xa
