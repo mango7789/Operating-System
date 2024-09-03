@@ -1,6 +1,7 @@
 # VScode directories
 **/build/
 **/.vscode/
+**/os-workbench/
 
 # Prerequisites
 *.d
