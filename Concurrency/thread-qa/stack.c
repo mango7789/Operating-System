@@ -18,11 +18,10 @@ void update_range(int T, char *ptr) {
 
 void probe(int T, int n) {
     // Local variables are stack-allocated.
-    char scratch[64];
+    char scratch[512];
     update_range(T, scratch);
 
-    printf("Stack(T%d) >= %ld KB\n",
-        T, (high[T] - low[T]) / 1024);
+    printf("Stack(T%d) >= %ld KB\n", T, (high[T] - low[T]) / 1024);
 
     probe(T, n + 1); // Infinite recursion.
 }
